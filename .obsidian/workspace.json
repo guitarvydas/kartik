@@ -190,7 +190,7 @@
           }
         ],
         "direction": "vertical",
-        "x": 132,
+        "x": 515,
         "y": 25,
         "width": 1024,
         "height": 715,
@@ -219,7 +219,7 @@
           }
         ],
         "direction": "vertical",
-        "x": 147,
+        "x": 515,
         "y": 25,
         "width": 1024,
         "height": 715,
@@ -230,7 +230,9 @@
   },
   "active": "5eb0fcf83cd78a61",
   "lastOpenFiles": [
+    "kartik",
     "kartik.o",
+    "hold-kartik.drawio",
     "syntax/#decls.odin#",
     "kartik.dSYM/Contents/Resources/DWARF/kartik",
     "kartik.dSYM/Contents/Resources/DWARF",
@@ -238,7 +240,6 @@
     "kartik.dSYM/Contents/Info.plist",
     "kartik.dSYM/Contents",
     "kartik.dSYM",
-    "kartik",
     "leaf0d/#leaf0d.odin#",
     "fresh.svg",
     "image-cache.svg",
@@ -247,7 +248,6 @@
     "Excalidraw/README 2023-08-13 21.41.24.excalidraw.md",
     "Excalidraw/README 2023-08-13 21.41.24.excalidraw.svg",
     "Excalidraw/README 2023-08-13 21.32.33.excalidraw.svg",
-    "Excalidraw",
     "kartik-viewer.drawio.svg",
     "kartik-main.drawio.svg",
     "main.png",

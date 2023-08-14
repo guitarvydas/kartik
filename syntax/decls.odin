@@ -43,6 +43,8 @@ container_decl_from_page :: proc(page: Page) -> Container_Decl {
     collect_through_decls(page.cells, &connections)
     decl.connections = connections[:]
 
+    fmt.printf ("cdfp: \n%v\n", decl)
+    
     return decl
 }
 
@@ -76,8 +78,8 @@ collect_up_decls :: proc(cells: []Cell, decls: ^[dynamic]Connect_Decl) {
         target_rhombus := cells[cell.target]
         if target_rhombus.type != .Rhombus do continue
 
-        // NOTE(z64): right now, i allow this to be any shape... might be ok?
         source_cell := cells[cell.source]
+	if source_cell.type != .Rect do continue
 
         decl.source_port = source_cell.value
         decl.target_port = target_rhombus.value
@@ -140,7 +142,6 @@ collect_down_decls :: proc(cells: []Cell, decls: ^[dynamic]Connect_Decl) {
         source_rhombus := cells[cell.source]
         if source_rhombus.type != .Rhombus do continue
 
-        // NOTE(z64): right now, i allow this to be any shape... might be ok?
         target_cell := cells[cell.target]
         if target_cell.type != .Rect {
             continue
@@ -150,12 +151,13 @@ collect_down_decls :: proc(cells: []Cell, decls: ^[dynamic]Connect_Decl) {
         decl.target_port = target_cell.value
 
         parent_rect := cells[target_cell.parent]
-        if parent_rect.type != .Rect && .Container in parent_rect.flags {
+        if !(parent_rect.type == .Rect && .Container in parent_rect.flags) {
             continue
         }
 
         decl.target = {parent_rect.value, parent_rect.id}
 
+	fmt.printf ("COLLECT down: %v\n", decl)
         append(decls, decl)
     }
 }

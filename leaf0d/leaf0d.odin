@@ -23,7 +23,7 @@ panic_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 panic_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    assert (false, msg.datum.(string))
+    fmt.assertf (false, "%v %v %v\n", eh.name, msg, msg.datum)
 }
 
 ////////
@@ -74,6 +74,7 @@ imagecache_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 imagecache_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^ImageCache_Instance_Data) {
+    fmt.printf ("imagecache handler: %v %v %v\n", eh.name, msg.port, msg.datum)
     switch inst.state {
     case .empty:
 	switch msg.port {
