@@ -36,7 +36,7 @@ So, if you agree with my assessment of the top level of the problem (which ain't
 
 ## Viewer
 
-![](kartik-viewer.drawio.svg|400)
+![](kartik-viewer.drawio.svg)
 
 ### Image Cache
 
