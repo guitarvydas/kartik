@@ -8,7 +8,7 @@ And, there is a `panic` situation if any kind of error occurs (I'm too lazy to t
 
 Is that about right?
 
-![](kartik-main.drawio.svg|400)
+![](kartik-main.drawio.svg)
 ## Inputs
 1. `Plot!` - button push by user, data: don't care (maybe seen as a Boolean (actually a Bang, a pulse))
 2. `frame tick` - fires every time there is a new frame to be displayed, data: don't care
