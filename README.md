@@ -74,9 +74,37 @@ Start by testing the inner-most components and then working back outwards.
 ## Testing of the viewer Component
 
 # JSON For The Components
-## Top Level Component
-## Viewer
+## Top Level Component (Container)
+## Viewer (Container)
 ## Leaf Components
-### Panic
-### render
-### Image Cache
+### Panic (Leaf)
+### render (Leaf)
+### Image Cache (Leaf)
+3 Semantic States
+1. empty
+2. fresh
+3. stale
+
+---
+
+
+![[README 2023-08-13 21.32.33.excalidraw]]
+
+---
+
+![[README 2023-08-13 21.41.24.excalidraw]]
+
+---
+
+
+Implementation-wise, (1) and (3) produce the same actions and might be folded together.  Semantically, though, they are distinct states (at least, from what I read in your problem description).
+
+When in state `empty`:
+- input `force rendering` does nothing and the machine remains in the `empty` state
+- input `image update` causes the message datum - the image - to be saved in local state, and the machine moves to the `fresh` state
+When in state `fresh`, 
+- input `force rendering` causes the machine to `send()` the image on its output port `render` and the machine moves to the `stale` state
+- input `image update` causes the message datum to be saved in local state and the machine moves to the `fresh` state (this could be optimized to be a noop)
+When in state `stale`
+- input `force rendering` causes the machine to move to the `stale` state (optimization: noop), nothing is output
+- input `image update` causes the message datum to be saved in local state and the machine moves to the `fresh` state
