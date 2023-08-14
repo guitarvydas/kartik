@@ -24,7 +24,7 @@ main :: proc() {
     }
 
     // load arguments
-    diagram_source_file := slice.get(os.args, 1) or_else "ghoststars.drawio"
+    diagram_source_file := slice.get(os.args, 1) or_else "kartik.drawio"
     main_container_name := slice.get(os.args, 2) or_else "main"
 
     if !os.exists(diagram_source_file) {
@@ -34,15 +34,6 @@ main :: proc() {
 
     // set up shell leaves
     leaves := make([dynamic]reg.Leaf_Instantiator)
-    leaf.collect_process_leaves(diagram_source_file, &leaves)
-
-    // export native leaves
-    append(&leaves, reg.Leaf_Instantiator {
-        name = "stdout",
-        init = leaf.stdout_instantiate,
-    })
-
-
 
     user.components (&leaves)
 
@@ -64,12 +55,5 @@ main :: proc() {
 }
 
 run :: proc (main_container : ^zd.Eh) {
-    main_container.handler(main_container, zd.make_message("grammar", "grammar.ohm"))
-    main_container.handler(main_container, zd.make_message("fab", "fabricate.fab"))
-    main_container.handler(main_container, zd.make_message("support", "support.js"))
-    main_container.handler(main_container, zd.make_message("srcfilename", "src.txt"))
-    main_container.handler(main_container, zd.make_message("grammar", "grammar.ohm"))
-    main_container.handler(main_container, zd.make_message("fab", "lispfabricate.fab"))
-    main_container.handler(main_container, zd.make_message("support", "support.js"))
-    main_container.handler(main_container, zd.make_message("srcfilename", "src.txt"))
+    main_container.handler(main_container, zd.make_message("frame tick", 0))
 }

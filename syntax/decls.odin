@@ -1,5 +1,7 @@
 package syntax
 
+import "core:fmt"
+
 Container_Decl :: struct {
     file:        string,
     name:        string,
@@ -140,6 +142,9 @@ collect_down_decls :: proc(cells: []Cell, decls: ^[dynamic]Connect_Decl) {
 
         // NOTE(z64): right now, i allow this to be any shape... might be ok?
         target_cell := cells[cell.target]
+        if target_cell.type != .Rect {
+            continue
+        }
 
         decl.source_port = source_rhombus.value
         decl.target_port = target_cell.value
