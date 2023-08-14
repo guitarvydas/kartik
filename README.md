@@ -88,11 +88,11 @@ Start by testing the inner-most components and then working back outwards.
 ---
 
 
-![[README 2023-08-13 21.32.33.excalidraw]]
+![image cache](image-cache.svg)
 
 ---
 
-![[README 2023-08-13 21.41.24.excalidraw]]
+![fresh](fresh.svg)
 
 ---
 
