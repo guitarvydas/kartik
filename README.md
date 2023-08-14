@@ -108,3 +108,5 @@ When in state `fresh`,
 When in state `stale`
 - input `force rendering` causes the machine to move to the `stale` state (optimization: noop), nothing is output
 - input `image update` causes the message datum to be saved in local state and the machine moves to the `fresh` state
+
+NB: as shown, if the `fresh` state gets an `image update` message, it will render the current image before saving the new one - is this correct behaviour? 
