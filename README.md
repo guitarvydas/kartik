@@ -1,12 +1,14 @@
 
 # Topmost Overview
+*[Thinking about https://docs.google.com/document/d/1EbK4AxDCDWonMa8KyGJFX4jllXXLew0qBsGxsmqoYqk/edit?pli=1]*
+
 As I understand it, there are 3 inputs and 1 output and one unspecified image rendering thingie.
 
 And, there is a `panic` situation if any kind of error occurs (I'm too lazy to think about how to handle errors).
 
 Is that about right?
 
-![[kartik-main.drawio.svg|400]]
+![](kartik-main.drawio.svg|400)
 ## Inputs
 1. `Plot!` - button push by user, data: don't care (maybe seen as a Boolean (actually a Bang, a pulse))
 2. `frame tick` - fires every time there is a new frame to be displayed, data: don't care
@@ -34,7 +36,7 @@ So, if you agree with my assessment of the top level of the problem (which ain't
 
 ## Viewer
 
-![[kartik-viewer.drawio.svg|400]]
+![](kartik-viewer.drawio.svg|400)
 
 ### Image Cache
 
