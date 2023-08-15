@@ -43,8 +43,6 @@ container_decl_from_page :: proc(page: Page) -> Container_Decl {
     collect_through_decls(page.cells, &connections)
     decl.connections = connections[:]
 
-    fmt.printf ("cdfp: \n%v\n", decl)
-    
     return decl
 }
 
@@ -157,7 +155,6 @@ collect_down_decls :: proc(cells: []Cell, decls: ^[dynamic]Connect_Decl) {
 
         decl.target = {parent_rect.value, parent_rect.id}
 
-	fmt.printf ("COLLECT down: %v\n", decl)
         append(decls, decl)
     }
 }

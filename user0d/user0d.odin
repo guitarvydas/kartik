@@ -7,14 +7,17 @@ import zd "../0d"
 import leaf "../leaf0d"
 
 start_logger :: proc () -> bool {
-    return true
+    return false
 }
 
 components :: proc (leaves: ^[dynamic]reg.Leaf_Initializer) {
     append(leaves, reg.Leaf_Instantiator { name = "panic", init = leaf.panic_instantiate })
-    append(leaves, reg.Leaf_Instantiator { name = "?", init = leaf.probe_instantiate })
-    append(leaves, reg.Leaf_Instantiator { name = "render", init = leaf.panic_instantiate })
-    append(leaves, reg.Leaf_Instantiator { name = "Image Cache", init = leaf.panic_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "Fake Image", init = leaf.fake_image_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "?A", init = leaf.probe_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "?B", init = leaf.probe_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "?C", init = leaf.probe_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "render", init = leaf.render_instantiate })
+    append(leaves, reg.Leaf_Instantiator { name = "Image Cache", init = leaf.imagecache_instantiate })
 }
 
 

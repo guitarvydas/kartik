@@ -37,7 +37,8 @@ main :: proc() {
 
     user.components (&leaves)
 
-    reg.dump_diagram (diagram_source_file)
+//    reg.dump_diagram (diagram_source_file)
+
     regstry := reg.make_component_registry(leaves[:], diagram_source_file)
 
     // get entrypoint container
@@ -56,7 +57,7 @@ main :: proc() {
 }
 
 run :: proc (main_container : ^zd.Eh) {
-    test2 (main_container)
+    test3 (main_container)
 }
 
 test1 :: proc (main_container : ^zd.Eh) {
@@ -64,5 +65,13 @@ test1 :: proc (main_container : ^zd.Eh) {
 }
 
 test2 :: proc (main_container : ^zd.Eh) {
+        main_container.handler(main_container, zd.make_message("frame tick", 0))
+}
+
+test3 :: proc (main_container : ^zd.Eh) {
+        main_container.handler(main_container, zd.make_message("frame tick", 0))
+        main_container.handler(main_container, zd.make_message("Plot!", 0))
+        main_container.handler(main_container, zd.make_message("frame tick", 0))
+        main_container.handler(main_container, zd.make_message("image from R", "image A"))
         main_container.handler(main_container, zd.make_message("frame tick", 0))
 }

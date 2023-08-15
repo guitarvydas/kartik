@@ -114,7 +114,6 @@ output_list :: proc(eh: ^Eh, allocator := context.allocator) -> []Message {
 
 // The default handler for container components.
 container_handler :: proc(eh: ^Eh, message: Message) {
-    fmt.printf ("container handler: %v %v %v\n", eh.name, message.port, message.datum)
     route(eh, nil, message)
     for any_child_ready(eh) {
         step_children(eh)
@@ -207,12 +206,6 @@ sender_eq :: proc(s1, s2: Sender) -> bool {
 
 // Delivers the given message to the receiver of this connector.
 deposit :: proc(c: Connector, message: Message) {
-    fmt.printf ("deposit %v\n", c)
-    fmt.printf ("deposit: %v (/%v/,/%v/)->(/%v/,/%v/) %v %v\n",
-		c.direction,
-		c.sender.name, c.sender.port,
-		c.receiver.name, c.receiver.port,
-		message.port, message.datum)
     new_message := message_clone(message)
     new_message.port = c.receiver.port
     fifo_push(c.receiver.queue, new_message)
@@ -261,8 +254,6 @@ tick :: proc (eh: ^Eh) {
 // Routes a single message to all matching destinations, according to
 // the container's connection network.
 route :: proc(container: ^Eh, from: ^Eh, message: Message) {
-    fmt.printf ("route: eh: %v from: %v port: %v datum: %v\n", container.name, from.name, message.port, message.datum)
-    fmt.printf ("\n*** route container: %v\n\n", container^)
     was_sent := false // for checking that output went somewhere (at least during bootstrap)
     if message.port == "." {
 	for child in container.children {
@@ -277,7 +268,6 @@ route :: proc(container: ^Eh, from: ^Eh, message: Message) {
 	from_sender := Sender{fname, from, message.port}
 	
 	for connector in container.connections {
-	    fmt.printf ("route connector: %v\n", connector)
             if sender_eq(from_sender, connector.sender) {
 		deposit(connector, message)
 		was_sent = true

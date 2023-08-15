@@ -36,21 +36,27 @@ render_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 render_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    fmt.printf ("@@@ render invoked with message ~v\n") // stubbed out for now
+    fmt.printf ("@@@ render invoked with message (%v,%v)\n", msg.port, msg.datum) // stubbed out for now
 }
 
-////////
 /////////
 
 probe_instantiate :: proc(name: string) -> ^zd.Eh {
-    @(static) counter := 0
-    counter += 1
-    name_with_id := fmt.aprintf("?%d", counter)
-    return zd.make_leaf(name_with_id, probe_proc)
+    return zd.make_leaf(name, probe_proc)
 }
 
 probe_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
     fmt.println (eh.name, msg.datum)
+}
+
+/////////
+
+fake_image_instantiate :: proc(name: string) -> ^zd.Eh {
+    return zd.make_leaf(name, fake_image_proc)
+}
+
+fake_image_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
+    zd.send (eh, "output", "Fake Image[A]")
 }
 ///
 
@@ -74,7 +80,6 @@ imagecache_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 imagecache_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^ImageCache_Instance_Data) {
-    fmt.printf ("imagecache handler: %v %v %v\n", eh.name, msg.port, msg.datum)
     switch inst.state {
     case .empty:
 	switch msg.port {

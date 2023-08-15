@@ -66,8 +66,6 @@ get_component_instance :: proc(reg: Component_Registry, name: string) -> (instan
 
 container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_Decl) -> ^zd.Eh {
 
-    fmt.printf ("\n*** container INIT begins with \n%v\n", decl)
-
     container := zd.make_container(decl.name)
 
     children := make([dynamic]^zd.Eh)
@@ -104,7 +102,6 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
             source_component: ^zd.Eh
             source_ok := false
 
-	    fmt.printf ("container init %v\n", c)
 
             switch c.dir {
             case .Down:
@@ -116,8 +113,6 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
                 }
                 source_ok = true
 
-		fmt.printf ("\n@@@ cont init: c.target.id=%v\n\n", c.target.id)
-			    
                 target_component, target_ok = child_id_map[c.target.id]
                 connector.receiver = {
 		    target_component.name,
@@ -183,8 +178,6 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
 
         container.connections = connectors[:]
     }
-
-    fmt.printf ("\n*** container INIT returns \n%v\n", container)
 
     return container
 }
