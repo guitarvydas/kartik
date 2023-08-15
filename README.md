@@ -14,6 +14,8 @@ Deep in the bowels of this thing, I draw a State Machine something like
 
 code repo: https://github.com/guitarvydas/kartik
 
+# Usage
+`make`
 # Topmost Overview
 *[Thinking about https://docs.google.com/document/d/1EbK4AxDCDWonMa8KyGJFX4jllXXLew0qBsGxsmqoYqk/edit?pli=1]*
 
