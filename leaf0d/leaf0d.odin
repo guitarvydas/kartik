@@ -56,7 +56,9 @@ fake_image_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 fake_image_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    zd.send (eh, "output", "Fake Image[A]")
+    @(static) imagecounter := 0
+    zd.send (eh, "output", fmt.aprintf ("Fake Image[%v]", imagecounter))
+    imagecounter += 1
 }
 ///
 

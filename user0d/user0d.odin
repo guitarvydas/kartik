@@ -7,7 +7,7 @@ import zd "../0d"
 import leaf "../leaf0d"
 
 start_logger :: proc () -> bool {
-    return false
+    return true
 }
 
 components :: proc (leaves: ^[dynamic]reg.Leaf_Initializer) {
