@@ -51,14 +51,19 @@ probe_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
 
 /////////
 
-fake_image_instantiate :: proc(name: string) -> ^zd.Eh {
-    return zd.make_leaf(name, fake_image_proc)
+Faker_Instance_Data :: struct {
+    counter : int
 }
 
-fake_image_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    @(static) imagecounter := 0
-    zd.send (eh, "output", fmt.aprintf ("Fake Image[%v]", imagecounter))
-    imagecounter += 1
+fake_image_instantiate :: proc(name: string) -> ^zd.Eh {
+    inst := new (Faker_Instance_Data)
+    inst.counter = 42
+    return zd.make_leaf_with_data (name, inst, fake_image_proc)
+}
+
+fake_image_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst : ^Faker_Instance_Data) {
+    zd.send (eh, "output", fmt.aprintf ("Fake Image[%v]", inst.counter))
+    inst.counter += 1
 }
 ///
 
@@ -76,7 +81,7 @@ imagecache_instantiate :: proc(name: string) -> ^zd.Eh {
     counter += 1
     name_with_id := fmt.aprintf("imagecache (ID:%d)", counter)
     inst := new (ImageCache_Instance_Data)
-    eh := zd.make_leaf(name_with_id, inst, imagecache_proc)
+    eh := zd.make_leaf_with_data(name_with_id, inst, imagecache_proc)
     imagecache_enter (eh, inst, .empty, zd.Message {})
     return eh
 }

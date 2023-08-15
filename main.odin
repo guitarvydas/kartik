@@ -69,10 +69,13 @@ test2 :: proc (main_container : ^zd.Eh) {
 }
 
 test3 :: proc (main_container : ^zd.Eh) {
-        main_container.handler(main_container, zd.make_message("frame tick", 0))
-        main_container.handler(main_container, zd.make_message("Plot!", 0))
-        main_container.handler(main_container, zd.make_message("frame tick", 0))
-        main_container.handler(main_container, zd.make_message("frame tick", 0))
-        main_container.handler(main_container, zd.make_message("Plot!", 0))
-        main_container.handler(main_container, zd.make_message("frame tick", 0))
+    main_container.handler(main_container, zd.make_message("frame tick", 0))
+    fmt.println ("--- press Plot!")
+    main_container.handler(main_container, zd.make_message("Plot!", 0))
+    main_container.handler(main_container, zd.make_message("frame tick", 0))
+    fmt.println ("    no press Plot!")
+    main_container.handler(main_container, zd.make_message("frame tick", 0))
+    fmt.println ("--- press Plot!")
+    main_container.handler(main_container, zd.make_message("Plot!", 0))
+    main_container.handler(main_container, zd.make_message("frame tick", 0))
 }
