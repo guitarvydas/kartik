@@ -36,8 +36,8 @@ main :: proc() {
     leaves := make([dynamic]reg.Leaf_Instantiator)
 
     user.components (&leaves)
-
-//    reg.dump_diagram (diagram_source_file)
+    
+    // reg.dump_diagram (diagram_source_file) // uncomment this line to get JSON dumped on console
 
     regstry := reg.make_component_registry(leaves[:], diagram_source_file)
 
@@ -70,12 +70,14 @@ test2 :: proc (main_container : ^zd.Eh) {
 
 test3 :: proc (main_container : ^zd.Eh) {
     main_container.handler(main_container, zd.make_message("frame tick", 0))
-    fmt.println ("--- press Plot!")
+    fmt.println ("   >>> press Plot!")
     main_container.handler(main_container, zd.make_message("Plot!", 0))
+    fmt.println ("   >>> frame tick")
     main_container.handler(main_container, zd.make_message("frame tick", 0))
-    fmt.println ("    no press Plot!")
+    fmt.println ("   >>> frame tick (no Plot! press)")
     main_container.handler(main_container, zd.make_message("frame tick", 0))
-    fmt.println ("--- press Plot!")
+    fmt.println ("   >>> press Plot!")
     main_container.handler(main_container, zd.make_message("Plot!", 0))
+    fmt.println ("   >>> frame tick")
     main_container.handler(main_container, zd.make_message("frame tick", 0))
 }

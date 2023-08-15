@@ -35,7 +35,7 @@ render_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 render_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    fmt.printf ("@@@ render invoked with message (%v,%v)\n", msg.port, msg.datum) // stubbed out for now
+    fmt.printf ("RENDER %v\n", msg.datum) // stubbed out for now
 }
 
 /////////
