@@ -54,12 +54,12 @@ make_container :: proc(name: string) -> ^Eh {
 // Creates a new leaf component out of a handler function, and optionally a user
 // data parameter that will be passed back to your handler when it is run.
 make_leaf :: proc{
-    make_leaf_simple,
+    make_leaf_with_no_instance_data,
     make_leaf_with_data,
 }
 
 // Creates a new leaf component out of a handler function.
-make_leaf_simple :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
+make_leaf_with_no_instance_data :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
     eh := new(Eh)
     eh.name = name
     eh.handler = handler

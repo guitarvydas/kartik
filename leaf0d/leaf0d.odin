@@ -17,9 +17,8 @@ import zd "../0d"
 panic_instantiate :: proc(name: string) -> ^zd.Eh {
     @(static) counter := 0
     counter += 1
-
     name_with_id := fmt.aprintf("panic (ID:%d)", counter)
-    return zd.make_leaf(name_with_id, panic_proc)
+    return zd.make_leaf_with_no_instance_data (name_with_id,  panic_proc)
 }
 
 panic_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
@@ -32,7 +31,7 @@ render_instantiate :: proc(name: string) -> ^zd.Eh {
     @(static) counter := 0
     counter += 1
     name_with_id := fmt.aprintf("render (ID:%d)", counter)
-    return zd.make_leaf(name_with_id, render_proc)
+    return zd.make_leaf_with_no_instance_data (name_with_id, render_proc)
 }
 
 render_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
@@ -42,7 +41,7 @@ render_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
 /////////
 
 probe_instantiate :: proc(name: string) -> ^zd.Eh {
-    return zd.make_leaf(name, probe_proc)
+    return zd.make_leaf_with_no_instance_data(name, probe_proc)
 }
 
 probe_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
@@ -58,7 +57,7 @@ Faker_Instance_Data :: struct {
 fake_image_instantiate :: proc(name: string) -> ^zd.Eh {
     inst := new (Faker_Instance_Data)
     inst.counter = 42
-    return zd.make_leaf_with_data (name, inst, fake_image_proc)
+    return zd.make_leaf (name, inst, fake_image_proc)
 }
 
 fake_image_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst : ^Faker_Instance_Data) {
@@ -81,7 +80,7 @@ imagecache_instantiate :: proc(name: string) -> ^zd.Eh {
     counter += 1
     name_with_id := fmt.aprintf("imagecache (ID:%d)", counter)
     inst := new (ImageCache_Instance_Data)
-    eh := zd.make_leaf_with_data(name_with_id, inst, imagecache_proc)
+    eh := zd.make_leaf(name_with_id, inst, imagecache_proc)
     imagecache_enter (eh, inst, .empty, zd.Message {})
     return eh
 }
